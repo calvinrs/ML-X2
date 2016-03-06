@@ -19,6 +19,30 @@ grad = zeros(size(theta));
 
 
 
+% COST
+
+%for thetaTransx for each observation x;
+thetaTransx = X * theta;
+G = sigmoid(thetaTransx);
+
+%split the summation in the cost fun
+% log already arrayfun's
+pJ = y' * log(G);
+nJ = (1 - y)' * log(1- G);
+
+%now with regularisation term!
+thetaJtoM =  [0; theta([2:size(theta,1)],:)];
+sumSqthetaJtoM = thetaJtoM' * thetaJtoM;
+
+J = ((-1 / m) * (pJ + nJ)) + ((lambda/(2*m)) * sumSqthetaJtoM);
+
+
+% GRADIENTS
+
+%diff obs. - actual
+D = G - y;
+%gradients + regularisation term (0 for first coeff.)
+grad = ((1 /m) * (X' * D)) + ((lambda/m) * thetaJtoM);
 
 
 
