@@ -20,13 +20,25 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+% COST
+
+%for thetaTransx for each observation x;
+thetaTransx = X * theta;
+G = sigmoid(thetaTransx);
+
+%split the summation in the cost fun
+% log already arrayfun's
+pJ = y' * log(G);
+nJ = (1 - y)' * log(1- G);
+
+J = (-1 / m) * (pJ + nJ);
 
 
+% GRADIENTS
 
-
-
-
-
+%diff obs. - actual
+D = G - y;
+grad = (1 /m) * (X' * D);
 % =============================================================
 
 end

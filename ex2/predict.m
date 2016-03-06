@@ -15,7 +15,11 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+thetaTransx = X * theta;
+G = sigmoid(thetaTransx);
 
+%decide if we have gone over the probablity threshold
+p = G >= .5;
 
 
 
