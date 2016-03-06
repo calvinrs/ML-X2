@@ -9,8 +9,9 @@ g = zeros(size(z));
 % Instructions: Compute the sigmoid of each value of z (z can be a matrix,
 %               vector or scalar).
 
+logistic = @(x) 1 / (1 + exp(-x));
 
-
+g = arrayfun(logistic, z);
 
 
 % =============================================================
